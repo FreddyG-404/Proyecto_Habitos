@@ -1,13 +1,16 @@
 package investigacionjwt.appjwt.models;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.time.LocalDateTime;
-
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "Usuarios")
@@ -35,17 +38,23 @@ public class Usuario {
     @Column(name = "enabled", nullable = false)
     private boolean enabled = false; // cambiar nombre del campo
 
-    @Column(name = "pais", nullable = true)
-    private String pais;
 
-    @Column(name = "telefono", nullable = true)
-    private String telefono;
 
-    @Column(name = "imagen_url", nullable = true)
-    private String imagenUrl;
+
 
     @Column(name = "estado", nullable = false)
     private boolean estado = true;
+    
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Habito> habitos = new ArrayList<>();
+
+    public List<Habito> getHabitos() {
+        return habitos;
+    }
+
+    public void setHabitos(List<Habito> habitos) {
+        this.habitos = habitos;
+    }
 
     public boolean isEstado() {
         return estado;
@@ -55,29 +64,7 @@ public class Usuario {
         this.estado = estado;
     }
 
-    public String getImagenUrl() {
-        return imagenUrl;
-    }
 
-    public void setImagenUrl(String imagenUrl) {
-        this.imagenUrl = imagenUrl;
-    }
-
-    public String getPais() {
-        return pais;
-    }
-
-    public void setPais(String pais) {
-        this.pais = pais;
-    }
-
-    public String getTelefono() {
-        return telefono;
-    }
-
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
-    }
 
     public boolean isEnabled() {
         return enabled;

@@ -8,8 +8,10 @@ import java.util.Optional;
 import java.util.UUID;
 import javax.crypto.SecretKey;
 import org.apache.commons.lang3.time.DateUtils;
-import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 
+import lombok.extern.slf4j.Slf4j;
+@Component
 @Slf4j // Anotación para habilitar un logger (registro de logs) en esta clase.
 public class JwtUtils {
     private static final SecretKey secretKey = Jwts.SIG.HS256.key().build();
